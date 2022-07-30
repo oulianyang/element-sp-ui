@@ -1,0 +1,211 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+
+@include b(form) {
+  @include m(label-left) {
+    & .sp-form-item__label {
+      position: relative;
+      padding-left: 8px;
+      text-align: left;
+      vertical-align: middle;
+      > * {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  @include b(form-item) {
+    @include when(required) {
+      @include pseudo("not(.is-no-asterisk)") {
+        & > .sp-form-item__label,
+        & .sp-form-item__label-wrap > .sp-form-item__label {
+          &:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  @include m(label-top) {
+    & .sp-form-item__label {
+      float: none;
+      display: inline-block;
+      text-align: left;
+      padding: 0 0 8px 0;
+    }
+  }
+  @include m(inline) {
+    & .sp-form-item {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: top;
+    }
+    & .sp-form-item__label {
+      float: none;
+      display: inline-block;
+    }
+    & .sp-form-item__content {
+      display: inline-block;
+      vertical-align: top;
+    }
+    &.sp-form--label-top .sp-form-item__content {
+      display: block;
+    }
+  }
+}
+@include b(form-item) {
+  margin-bottom: 20px;
+  @include utils-clearfix;
+
+  & .sp-form-item {
+    margin-bottom: 0;
+  }
+
+  & .sp-input__validateIcon {
+    display: none;
+  }
+
+  @include m(large) {
+    .sp-form-item__label {
+      line-height: 36px;
+    }
+    .sp-form-item__content {
+      line-height: 34px;
+    }
+  }
+
+  @include m(medium) {
+    .sp-form-item__label {
+      line-height: 32px;
+    }
+    .sp-form-item__content {
+      line-height: 30px;
+    }
+  }
+  @include m(small) {
+    .sp-form-item__label {
+      line-height: 28px;
+    }
+    .sp-form-item__content {
+      line-height: 26px;
+    }
+    &.sp-form-item {
+      margin-bottom: 18px;
+    }
+  }
+  @include m(mini) {
+    .sp-form-item__label {
+      line-height: 24px;
+    }
+    .sp-form-item__content {
+      line-height: 22px;
+    }
+    &.sp-form-item {
+      margin-bottom: 18px;
+    }
+  }
+
+  @include e(label-wrap) {
+    float: left;
+    .sp-form-item__label {
+      display: inline-block;
+      float: none;
+    }
+  }
+
+  @include e(label) {
+    position: relative;
+    text-align: right;
+    vertical-align: middle;
+    float: left;
+    font-size: $--form-label-font-size;
+    color: $--color-text-third;
+    line-height: 32px;
+    padding: 0 4px 0 0;
+    box-sizing: border-box;
+  }
+  @include e(content) {
+    line-height: 30px;
+    position: relative;
+    font-size: 14px;
+    @include utils-clearfix;
+
+    .sp-input-group {
+      vertical-align: top;
+    }
+  }
+  @include e(error) {
+    color: $--color-danger;
+    font-size: 12px;
+    line-height: 18px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    @include m(inline) {
+      position: relative;
+      top: auto;
+      left: auto;
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+  @include e(tips) {
+    color: $--color-info-light-7;
+    font-size: 12px;
+    line-height: 18px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    @include m(inline) {
+      position: relative;
+      top: auto;
+      left: auto;
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+
+  @include when(required) {
+    @include pseudo("not(.is-no-asterisk)") {
+      & > .sp-form-item__label,
+      & .sp-form-item__label-wrap > .sp-form-item__label {
+        &:before {
+          content: "*";
+          color: $--color-danger;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+
+  @include when(error) {
+    & .sp-input__inner,
+    & .sp-textarea__inner {
+      &,
+      &:focus {
+        border-color: $--color-danger;
+      }
+    }
+    & .sp-input-group__append,
+    & .sp-input-group__prepend {
+      & .sp-input__inner {
+        border-color: transparent;
+      }
+    }
+    .sp-input__validateIcon {
+      color: $--color-danger;
+    }
+  }
+
+  @include m(feedback) {
+    .sp-input__validateIcon {
+      display: inline-block;
+    }
+  }
+}

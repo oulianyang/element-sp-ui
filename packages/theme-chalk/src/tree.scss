@@ -1,0 +1,129 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "common/transition";
+// @import "checkbox";
+
+@include b(tree) {
+  position: relative;
+  overflow-x: auto;
+  cursor: default;
+  background: $--color-white;
+  color: $--tree-font-color;
+
+  @include e(empty-block) {
+    position: relative;
+    min-height: 60px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(empty-text) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: $--color-text-secondary;
+    font-size: $--font-size-base;
+  }
+
+  @include e(drop-indicator) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: $--color-primary;
+  }
+}
+
+@include b(tree-node) {
+  white-space: nowrap;
+  outline: none;
+  &:focus { /* focus */
+    > .sp-tree-node__content {
+      background-color: $--color-primary-light-1;
+      border-radius: $--border-radius-base;
+      .sp-tree-node__label {
+        color: $--color-primary;
+      }
+    }
+  }
+
+  @include when(drop-inner) {
+    > .sp-tree-node__content .sp-tree-node__label {
+      background-color: $--color-primary;
+      color: #fff;
+    }
+  }
+
+  @include e(content) {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    cursor: pointer;
+
+    & > .sp-tree-node__expand-icon {
+      padding: 6px;
+    }
+    & > label.sp-checkbox {
+      margin-right: 8px;
+    }
+    &:hover {
+      background-color: $--tree-node-hover-background-color;
+      border-radius: $--border-radius-base;
+    }
+
+    .sp-tree.is-dragging & {
+      cursor: move;
+
+      & * {
+        pointer-events: none;
+      }
+    }
+
+    .sp-tree.is-dragging.is-drop-not-allow & {
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(expand-icon) {
+    cursor: pointer;
+    color: $--tree-expand-icon-color;
+    font-size: 12px;
+
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+
+    &.expanded {
+      transform: rotate(90deg);
+    }
+
+    &.is-leaf {
+      color: transparent;
+      cursor: default;
+    }
+  }
+
+  @include e(label) {
+    font-size: $--font-size-base;
+  }
+
+  @include e(loading-icon) {
+    margin-right: 8px;
+    font-size: $--font-size-base;
+    color: $--tree-expand-icon-color;
+  }
+
+  & > .sp-tree-node__children {
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+  &.is-expanded > .sp-tree-node__children {
+    display: block;
+  }
+}
+
+.sp-tree--highlight-current .sp-tree-node.is-current > .sp-tree-node__content {
+  background-color: mix($--color-white, $--color-primary, 92%);
+}

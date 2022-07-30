@@ -1,0 +1,161 @@
+@import "../common/var";
+@import "../mixins/mixins";
+@import "./picker-panel.scss";
+
+@include b(datetime-range-picker) {
+  width: 280px;
+
+  &.has-time {
+    width: 448px;
+
+    .sp-time-spinner__wrapper {
+      max-height: 247px;
+
+      .sp-time-spinner__list {
+        &::after {
+          height: 198px;
+        }
+      }
+    }
+  }
+
+  &.has-sidebar.has-time {
+    width: 434px;
+  }
+
+  &.has-sidebar {
+    width: 438px;
+  }
+
+  &.has-time .sp-picker-panel__body-wrapper {
+    position: relative;
+  }
+
+  .sp-picker-panel__body {
+    display: flex;
+
+    >.sp-datetime-range-picker__left {
+      width: 280px;
+    }
+
+    >.sp-datetime-range-picker__right {
+      width: 168px;
+      border-left: 1px solid $--border-color-light;
+
+      >.sp-datetime-range-picker_time-input {
+        display: flex;
+        padding: 6px 8px;
+
+        >.sp-input,
+        >.sp-input>.sp-input__inner {
+          height: 28px;
+          line-height: 28px;
+        }
+
+        .sp-input__icon {
+          font-size: 16px;
+          line-height: 28px;
+        }
+
+        .sp-icon-close-circle {
+          color: $--icon-color-base;
+
+          &:hover {
+            color: $--icon-color-base-hover;
+          }
+        }
+      }
+    }
+  }
+
+  .sp-picker-panel__content {
+    // width: 292px;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  >.popper__arrow{
+    transition: left 300ms;
+  }
+
+  @include e(editor-wrap) {
+    position: relative;
+    display: table-cell;
+    padding: 0 5px;
+  }
+
+  @include e(time-header) {
+    position: relative;
+    border-bottom: 1px solid $--datepicker-inner-border-color;
+    font-size: 12px;
+    padding: 8px 5px 5px 5px;
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @include e(header) {
+    display: flex;
+    padding: 10px 6px;
+    text-align: center;
+    align-items: center;
+    border-bottom: 1px solid $--color-info-light-4;
+
+    >.sp-datetime-range-picker__header-center {
+      flex: 1;
+      line-height: $--font-line-height-primary;
+      text-align: center;
+    }
+
+    @include m(bordered) {
+      margin-bottom: 0;
+      padding-bottom: 12px;
+      border-bottom: solid 1px $--border-color-lighter;
+
+      &+.sp-picker-panel__content {
+        margin-top: 0;
+      }
+    }
+  }
+
+  @include e(header-label) {
+    font-size: 12px;
+    font-weight: 600;
+    // padding: 0 5px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    color: $--color-text-regular;
+
+    &:hover {
+      color: $--datepicker-hover-font-color;
+    }
+
+    &.active {
+      color: $--datepicker-active-color;
+    }
+  }
+
+  @include e(prev-btn) {
+    float: left;
+  }
+
+  @include e(next-btn) {
+    float: right;
+  }
+
+  @include e(time-wrap) {
+    padding: 10px;
+    text-align: center;
+  }
+
+  @include e(time-label) {
+    float: left;
+    cursor: pointer;
+    line-height: 30px;
+    margin-left: 10px;
+  }
+}

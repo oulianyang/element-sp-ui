@@ -1,0 +1,121 @@
+@import "../common/var";
+
+@include b(date-range-picker) {
+  width: 560px;
+
+  &.has-sidebar {
+    width: 756px;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .sp-picker-panel__body {
+    min-width: 513px;
+  }
+
+  .sp-picker-panel__content {
+    margin: 0;
+  }
+
+  @include e(header) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 6px;
+    text-align: center;
+    border-bottom: 1px solid #E5E5E5;
+
+    [class*=arrow-left] {
+      float: left;
+    }
+
+    [class*=arrow-right] {
+      float: right;
+    }
+
+    div {
+      line-height: 18px;
+      min-width: 56px;
+
+      &.sp-date-range-picker__label {
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  @include e(date-table) {
+    padding: 12px;
+  }
+
+  @include e(month-table) {
+    padding: 18px;
+  }
+
+  @include e(content) {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 !important;
+
+    @include when(left) {
+      border-right: 1px solid $--datepicker-inner-border-color;
+    }
+
+    .sp-date-range-picker__header {
+
+      div {
+        // top: 0;
+        // margin: 0;
+        // width: 100%;
+        // position: absolute;
+        // text-align: center;
+      }
+    }
+  }
+
+  @include e(editors-wrap) {
+    box-sizing: border-box;
+    display: table-cell;
+
+    @include when(right) {
+      text-align: right;
+    }
+  }
+
+  @include e(time-header) {
+    position: relative;
+    border-bottom: 1px solid $--datepicker-inner-border-color;
+    font-size: 12px;
+    padding: 8px 5px 5px 5px;
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+
+    >.sp-icon-right {
+      font-size: 20px;
+      vertical-align: middle;
+      display: table-cell;
+      color: $--datepicker-icon-color;
+    }
+  }
+
+  @include e(time-picker-wrap) {
+    position: relative;
+    display: table-cell;
+    padding: 0 5px;
+
+    .sp-picker-panel {
+      position: absolute;
+      top: 13px;
+      right: 0;
+      z-index: 1;
+      background: $--color-white;
+    }
+  }
+}

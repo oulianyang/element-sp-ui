@@ -1,0 +1,232 @@
+@import "../mixins/mixins";
+@import "../common/var";
+@import "../common/transition";
+
+@include b(date-editor) {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+
+  &.sp-input,
+  &.sp-input__inner {
+    width: 200px;
+  }
+
+  @include m((monthrange)) {
+
+    &.sp-input,
+    &.sp-input__inner {
+      width: 228px;
+    }
+  }
+
+  @include m(daterange) {
+
+    &.sp-input,
+    &.sp-input__inner {
+      width: 228px;
+    }
+  }
+
+  @include m((time, timerange)) {
+
+    &.sp-input,
+    &.sp-input__inner {
+      width: 200px;
+    }
+  }
+
+  @include m(datetimerange) {
+
+    &.sp-input,
+    &.sp-input__inner {
+      width: 400px;
+    }
+  }
+
+  @include m(dates) {
+    .sp-input__inner {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .sp-input__icon {
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  .sp-icon-close-circle {
+    color: $--icon-color-base;
+    cursor: pointer;
+
+    &:hover {
+      color: $--icon-color-base-hover;
+    }
+  }
+
+  .sp-range__icon {
+    // margin-left: -5px;
+    color: $--color-text-placeholder;
+    // float: left;
+  }
+
+  .sp-range-input {
+    flex: 1;
+    appearance: none;
+    border: none;
+    outline: none;
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 39%;
+    text-align: center;
+    font-size: $--font-size-base;
+    color: $--color-text-regular;
+
+    &::placeholder {
+      color: $--color-text-placeholder;
+    }
+  }
+
+  .sp-range-separator {
+    display: inline-block;
+    height: 100%;
+    padding: 0 14px;
+    margin: 0;
+    text-align: center;
+    line-height: 24px;
+    font-size: $--font-size-base;
+    width: 5%;
+    color: $--color-text-primary;
+  }
+
+  .sp-picker-range-input--active {
+    color: $--color-primary;
+  }
+
+  .sp-range__close-icon {
+    color: $--icon-color-base;
+    // width: 25px;
+    display: inline-block;
+    &:hover {
+      color: $--icon-color-base-hover;
+    }
+  }
+
+  >.sp-input__suffix {
+    right: 5px;
+  }
+
+  >.sp-range-input__suffix {
+    right: 5px;
+    position: absolute;
+  }
+}
+
+@include b(range-editor) {
+  &.sp-input__inner {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 30px 3px 12px;
+  }
+
+  .sp-range-input {
+    line-height: 1;
+  }
+
+  @include when(active) {
+    border-color: $--color-primary;
+
+    &:hover {
+      border-color: $--color-primary;
+    }
+  }
+
+  @include m(medium) {
+    &.sp-input__inner {
+      height: $--input-medium-height;
+    }
+
+    .sp-range-separator {
+      line-height: 28px;
+      font-size: $--input-medium-font-size;
+    }
+
+    .sp-range-input {
+      font-size: $--input-medium-font-size;
+    }
+
+    .sp-range__icon,
+    .sp-range__close-icon {
+      line-height: 28px;
+    }
+  }
+
+  @include m(small) {
+    &.sp-input__inner {
+      height: $--input-small-height;
+    }
+
+    .sp-range-separator {
+      line-height: 30px;
+      font-size: $--input-small-font-size;
+    }
+
+    .sp-range-input {
+      font-size: $--input-small-font-size;
+    }
+
+    .sp-range__icon,
+    .sp-range__close-icon {
+      line-height: 30px;
+    }
+  }
+
+  @include m(mini) {
+    &.sp-input__inner {
+      height: $--input-mini-height;
+    }
+
+    .sp-range-separator {
+      line-height: 20px;
+      font-size: $--input-mini-font-size;
+    }
+
+    .sp-range-input {
+      font-size: $--input-mini-font-size;
+    }
+
+    .sp-range__icon,
+    .sp-range__close-icon {
+      line-height: 20px;
+    }
+  }
+
+  @include when(disabled) {
+    background-color: $--input-disabled-fill;
+    border-color: $--input-disabled-border;
+    color: $--input-disabled-color;
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus {
+      border-color: $--input-disabled-border;
+    }
+
+    input {
+      background-color: $--input-disabled-fill;
+      color: $--input-disabled-color;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $--input-disabled-placeholder-color;
+      }
+    }
+
+    .sp-range-separator {
+      color: $--input-disabled-color;
+    }
+  }
+}

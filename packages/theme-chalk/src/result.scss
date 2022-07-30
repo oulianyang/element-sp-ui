@@ -1,0 +1,69 @@
+@import 'mixins/mixins';
+@import 'common/var';
+
+@include b(result) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  box-sizing: border-box;
+  padding: $--result-padding;
+
+  @include e(icon) {
+    svg {
+      display: block;
+      width: $--result-icon-font-size;
+      height: $--result-icon-font-size;
+    }
+  }
+
+  @include m(icon) {
+    font-size: $--result-icon-font-size;
+  }
+
+  .sp-result__title {
+    margin-top: $--result-title-margin-top;
+    font-size: $--font-size-large;
+    line-height: 24px;
+
+    p {
+      margin: 0;
+      font-weight: $--font-weight-bold;
+      color: $--color-text-primary;
+      font-size: $--font-size-large;
+      line-height: 24px;
+    }
+  }
+
+  @include e(subtitle) {
+    margin-top: $--result-subtitle-margin-top;
+
+    p {
+      margin: 0;
+      font-size: $--font-size-base;
+      color: $--color-text-secondary;
+      line-height: 1.5;
+    }
+  }
+
+  @include e(extra) {
+    margin-top: $--result-extra-margin-top;
+  }
+
+  .sp-icon-success {
+    color: $--result-success-color;
+  }
+
+  .sp-icon-error {
+    color: $--result-danger-color;
+  }
+
+  .sp-icon-info {
+    color: $--result-info-color;
+  }
+
+  .sp-icon-warning {
+    color: $--result-warning-color;
+  }
+}

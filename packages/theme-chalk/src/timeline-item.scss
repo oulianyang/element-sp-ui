@@ -1,0 +1,109 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(timeline-item) {
+  position: relative;
+  padding-bottom: 12px;
+
+  @include e(wrapper) {
+    position: relative;
+    padding-left: 20px;
+    top: -3px;
+  }
+
+  @include e(tail) {
+    left: 6px;
+    height: 100%;
+    position: absolute;
+    transform: translateX(-0.5px);
+    border-left: 1px solid $--timeline-tail-color;
+  }
+
+  @include e(icon) {
+    color: $--color-white;
+    font-size: $--font-size-base;
+  }
+
+  @include e(node) {
+    left: 6px;
+    position: absolute;
+    background-color: $--timeline-node-color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-50%);
+    &::before{
+      content:'';
+      width: 8px;
+      height: 8px;
+      margin: 2px;
+      display: inline-block;
+      border-radius: inherit;
+      background-color: #ffffff;
+    }
+
+    @include m(normal) {
+      width: $--timeline-node-size-normal;
+      height: $--timeline-node-size-normal;
+    }
+    @include m(large) {
+      width: $--timeline-node-size-large;
+      height: $--timeline-node-size-large;
+    }
+
+    @include m(primary) {
+      background-color: $--color-primary;
+    }
+    @include m(success) {
+      background-color: $--color-success;
+    }
+    @include m(warning) {
+      background-color: $--color-warning;
+    }
+    @include m(danger) {
+      background-color: $--color-danger;
+    }
+    @include m(info) {
+      background-color: $--color-info;
+    }
+  }
+
+  @include e(dot) {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include e(content) {
+    color: $--color-text-secondary;
+    font-size: $--font-size-base;
+    line-height: $--font-line-height-primary;
+
+    @include e(title) {
+      margin-bottom: 4px;
+      color: $--color-text-primary;
+      font-weight: $--font-weight-bold;
+    }
+
+    @include e(description) {
+      &:first-child{
+        color: $--color-text-primary;
+      }
+    }
+  }
+
+  @include e(timestamp) {
+    color: $--color-text-secondary;
+    font-size: $--font-size-base;
+    line-height: $--font-line-height-primary;
+
+    @include when(top) {
+      margin-bottom: 4px;
+    }
+    @include when(bottom) {
+      margin-top: 4px;
+    }
+  }
+}

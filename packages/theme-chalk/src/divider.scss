@@ -1,0 +1,57 @@
+@import "common/var";
+@import "mixins/mixins";
+
+@include b(divider) {
+  background-color: $--border-color-light;
+  position: relative;
+  &.is-dashed {
+    background: linear-gradient(
+      to right,
+      $--color-info-light-5,
+      $--color-info-light-5 5px,
+      transparent 5px,
+      transparent
+    );
+    background-size: 10px 100%;
+  }
+
+  @include m(horizontal) {
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 24px 0;
+  }
+
+  @include m(vertical) {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    margin: 0 8px;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  @include e(text) {
+    position: absolute;
+    background-color: $--color-white;
+    padding: 0 20px;
+    font-weight: 500;
+    color: $--color-text-primary;
+    font-size: 14px;
+
+    @include when(left) {
+      left: 20px;
+      transform: translateY(-50%);
+    }
+
+    @include when(center) {
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    @include when(right) {
+      right: 20px;
+      transform: translateY(-50%);
+    }
+  }
+}

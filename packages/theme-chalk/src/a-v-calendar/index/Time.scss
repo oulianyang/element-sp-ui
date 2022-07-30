@@ -1,0 +1,6 @@
+@import './Input.scss';
+
+.sp-a-calendar-time-input {
+  @include sp-a-calendar-input;
+  width: 40px;
+}

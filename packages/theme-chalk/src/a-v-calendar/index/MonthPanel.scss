@@ -1,0 +1,143 @@
+.sp-a-calendar-month-panel {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #ffffff;
+  z-index: 10;
+  position: absolute;
+  outline: none;
+
+  > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sp-a-calendar-month-panel-hidden {
+  display: none;
+}
+
+.sp-a-calendar-month-panel-header {
+  padding: 0 10px;
+  height: 34px;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  border-bottom: 1px solid #ccc;
+
+  > a {
+    font-weight: bold;
+    display: inline-block;
+    padding: 4px 5px;
+    text-align: center;
+    width: 30px;
+
+    &:hover {
+      cursor: pointer;
+      color: #23c0fa;
+    }
+  }
+}
+
+.sp-a-calendar-month-panel-prev-year-btn,
+.sp-a-calendar-month-panel-next-year-btn {
+  position: absolute;
+  top: 0;
+}
+
+.sp-a-calendar-month-panel-next-year-btn {
+  &:after {
+    content: '»';
+  }
+}
+
+.sp-a-calendar-month-panel-prev-year-btn {
+  user-select: none;
+  left: 0;
+
+  &:after {
+    content: '«';
+  }
+}
+
+.sp-a-calendar-month-panel .sp-a-calendar-month-panel-year-select {
+  width: 180px;
+}
+
+.sp-a-calendar-month-panel-year-select-arrow {
+  display: none;
+}
+
+.sp-a-calendar-month-panel-next-year-btn {
+  user-select: none;
+  right: 0;
+}
+
+.sp-a-calendar-month-panel-body {
+  flex: 1;
+  padding: 9px 10px 10px;
+}
+
+.sp-a-calendar-month-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
+}
+
+.sp-a-calendar-month-panel-table {
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+  border-collapse: separate;
+}
+
+.sp-a-calendar-month-panel-cell {
+  text-align: center;
+
+  .sp-a-calendar-month-panel-month {
+    display: block;
+    width: 46px;
+    margin: 0 auto;
+    color: #666;
+    border-radius: 4px 4px;
+    height: 36px;
+    padding: 0;
+    background: transparent;
+    line-height: 36px;
+    text-align: center;
+
+    &:hover {
+      background: #ebfaff;
+      cursor: pointer;
+    }
+  }
+
+  &-disabled {
+    .sp-a-calendar-month-panel-month {
+      color: #bfbfbf;
+
+      &:hover {
+        background: white;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.sp-a-calendar-month-panel-selected-cell .sp-a-calendar-month-panel-month {
+  background: #3fc7fa;
+  color: #fff;
+
+  &:hover {
+    background: #3fc7fa;
+    color: #fff;
+  }
+}
+
+.sp-a-calendar-month-header-wrap {
+  position: relative;
+  height: 308px;
+}

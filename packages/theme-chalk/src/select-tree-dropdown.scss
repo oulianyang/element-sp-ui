@@ -1,0 +1,105 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "./popper";
+
+@include b(select-tree-dropdown) {
+  position: absolute;
+  z-index: #{$--index-top + 1};
+  border: $--select-dropdown-border;
+  border-radius: $--border-radius-base;
+  background-color: $--select-dropdown-background;
+  box-shadow: $--select-dropdown-shadow;
+  box-sizing: border-box;
+  margin: 5px 0;
+
+  .sp-tree__empty-block {
+    display: none;
+  }
+  .sp-tree-node {
+    &.is-checked {
+      >.sp-tree-node__content {
+        color: $--select-option-selected-font-color;
+        background-color: $--select-dropdown-selected-background;
+      }
+    }
+  }
+
+  @include when(multiple) {
+    & .sp-select-dropdown__item.selected {
+      color: $--select-option-selected-font-color;
+      background-color: $--select-dropdown-selected-background;
+
+      &.hover {
+        background-color: $--select-dropdown-selected-background;
+      }
+
+      &::after {
+        position: absolute;
+        right: 20px;
+        font-family: 'iconfont-sp-micro-fe-element';
+        content: "\e7fc";
+        font-size: 12px;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+  }
+
+  .sp-scrollbar.is-empty .sp-select-tree-dropdown__list{
+    padding: 0;
+  }
+  .sp-tree {
+    overflow: unset;
+    & .sp-tree-node__content {
+      display: block;
+    }
+    & .sp-tree-node__label {
+      margin-right: $--block-space-3;
+    }
+    .sp-tree-node > .sp-tree-node__children {
+      overflow: unset;
+    }
+  }
+}
+
+@include b(select-tree-dropdown__empty) {
+  padding: $--select-dropdown-empty-padding;
+  margin: 0;
+  text-align: center;
+  color: $--select-dropdown-empty-color;
+  font-size: $--select-font-size;
+}
+
+@include b(select-tree-dropdown__wrap) {
+  max-height: $--select-dropdown-max-height;
+}
+
+@include b(select-tree-dropdown__list) {
+  list-style: none;
+  padding: $--select-dropdown-padding;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@include b(select-tree-dropdown__list-operate) {
+  font-size: $--select-font-size;
+  padding: 0 12px;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $--select-option-selected-font-color;
+  height: $--select-option-height;
+  line-height: $--select-option-height;
+  box-sizing: border-box;
+}
+
+@include b(select-tree-dropdown__select-all) {
+  margin-right: 24px;
+  cursor: pointer;
+}
+
+@include b(select-tree-dropdown__deselect-all) {
+  cursor: pointer;
+}

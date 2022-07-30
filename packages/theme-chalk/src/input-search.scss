@@ -1,0 +1,203 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(input-search) {
+  @keyframes loading {
+    from {
+      transform: rotateZ(0deg);
+    }
+
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
+
+  >.sp-input {
+    >.sp-input-group__prepend {
+      background-color: transparent;
+
+      >.sp-select {
+        >.sp-input {
+          min-width: 80px;
+        }
+      }
+    }
+
+    >.sp-input__prefix {
+      left: 12px;
+
+      >.sp-input-search__icon {
+        padding: 7px 0;
+      }
+    }
+
+    >.sp-input__inner {
+      z-index: 1;
+    }
+    > .sp-input__suffix {
+      z-index: 3;
+    }
+  }
+
+  @include e(icon) {
+    padding: 6px 0;
+    font-size: $--font-size-medium;
+    color: $--color-text-placeholder;
+    line-height: $--font-line-height-primary;
+  }
+
+  @include when(manual) {
+    >.sp-input {
+      >.sp-input-group__append {
+        padding: 0;
+        background-color: #ffffff;
+
+        >.sp-input-search__icon {
+          cursor: pointer;
+          padding: 6px 8px;
+          font-size: $--font-size-medium;
+          color: $--color-text-primary;
+
+          &:hover {
+            color: $--button-primary-background-color;
+          }
+
+          &[text] {
+            z-index: 2;
+            // height: 20px;
+            padding: 5px 12px;
+            position: relative;
+            line-height: $--font-line-height-primary;
+            border-top-right-radius: calc($--border-radius-base /2);
+            border-bottom-right-radius: calc($--border-radius-base /2);
+            background-color: $--button-primary-background-color;
+            box-shadow: 0 0 0 1px $--button-primary-background-color;
+
+            &:hover {
+              color: $--button-primary-font-color;
+              background-color: $--button-primary-background-color-hover;
+              box-shadow: 0 0 0 1px $--button-primary-background-color-hover;
+            }
+
+            &:active {
+              color: $--button-primary-font-color;
+              background-color: $--button-primary-background-color-active;
+              box-shadow: 0 0 0 1px $--button-primary-background-color-active;
+            }
+
+            &::before {
+              content: attr(text);
+              font-size: $--button-font-size;
+              color: $--button-primary-font-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include e(popper) {
+    &.is-manual {
+      .sp-autocomplete-suggestion__list {
+        padding-bottom: 34px;
+      }
+    }
+
+    .sp-autocomplete-suggestion__wrap {
+      padding: 4px 0;
+
+      .sp-autocomplete-suggestion__list {
+
+        >li {
+          padding: 0;
+
+          &:hover {
+            background-color: transparent;
+          }
+
+          >.sp-input-search__item {
+            position: relative;
+            padding: 0 12px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: $--select-option-height;
+
+            &:hover {
+              background-color: $--color-info-light-2;
+
+              >.sp-input-search__remove {
+                display: inline-block;
+                background-color: $--color-info-light-2;
+              }
+            }
+
+            >.sp-input-search__remove {
+              right: 12px;
+              width: 16px;
+              // height: 16px;
+              margin: 8px 0;
+              display: none;
+              font-size: 14px;
+              line-height: 16px;
+              user-select: none;
+              position: absolute;
+              text-align: center;
+              background-color: #ffffff;
+              color: $--color-text-secondary;
+
+              &:hover {
+                color: $--color-primary;
+              }
+            }
+          }
+
+          >.sp-icon-loading {
+            animation: loading 800ms linear infinite;
+          }
+
+        }
+      }
+
+      @include e(loading) {
+        left: 0;
+        right: 0;
+        position: relative;
+        text-align: center;
+        pointer-events: none;
+        background-color: $--color-info-light-1;
+
+        >.sp-icon-loading {
+          animation: none;
+          color: $--color-text-secondary;
+
+          &::before {
+            margin-right: 4px;
+            display: inline-block;
+            animation: loading 800ms linear infinite;
+          }
+
+          &::after {
+            content: attr(loading-text);
+          }
+        }
+      }
+
+      @include e(clear) {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        text-align: center;
+        background-color: $--color-info-light-1;
+        border-top: 1px solid $--border-color-light;
+      }
+    }
+  }
+
+  .sp-input-group__append, .sp-input-group__prepend {
+    &:hover {
+      border: 1px solid $--color-primary;
+    }
+  }
+}

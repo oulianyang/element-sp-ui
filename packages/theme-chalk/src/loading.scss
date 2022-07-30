@@ -1,0 +1,242 @@
+@use "sass:math";
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(loading-parent) {
+  @include m(relative) {
+    position: relative !important;
+  }
+
+  @include m(hidden) {
+    overflow: hidden !important;
+  }
+}
+
+@include b(loading-mask) {
+  position: absolute;
+  height: 100%;
+  z-index: 2000;
+  background-color: rgba(255, 255, 255, .9);
+  margin: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: opacity 0.3s;
+
+  @include when(fullscreen) {
+    position: fixed;
+
+    .sp-loading-spinner {
+      margin-top: #{math.div(-$--loading-fullscreen-spinner-size, 2)};
+
+      .circular {
+        height: $--loading-fullscreen-spinner-size;
+        width: $--loading-fullscreen-spinner-size;
+      }
+    }
+    .sp-loading-spinner__sp-loading-dot-circle {
+      height: auto;
+      top: 50%;
+
+      .sp-loading-dot-circle {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+@include b(loading-spinner) {
+  top: 50%;
+  margin-top: #{math.div(-$--loading-spinner-size, 2)};
+  width: 100%;
+  text-align: center;
+  position: absolute;
+
+  .sp-loading-text {
+    color: $--color-primary;
+    margin: 3px 0;
+    position: relative;
+    top: calc(50% + 50px);
+    // font-size: 14px;
+  }
+
+  .circular {
+    height: $--loading-spinner-size;
+    width: $--loading-spinner-size;
+    animation: loading-rotate 2s linear infinite;
+  }
+
+  .sp-loading-dot-circle {
+    margin-bottom: 3em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  .path {
+    animation: loading-dash 1.5s ease-in-out infinite;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    stroke: $--color-primary;
+    stroke-linecap: round;
+  }
+
+  i {
+    color: $--color-primary;
+  }
+
+  @include e(large) {
+    margin-top: #{math.div(-80px, 2)};
+    .circular {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  @include e(medium) {
+    margin-top: #{math.div(-48px, 2)};
+    .circular {
+      height: 48px;
+      width: 48px;
+    }
+  }
+
+  @include e(small) {
+    margin-top: #{math.div(-32px, 2)};
+    .circular {
+      height: 32px;
+      width: 32px;
+    }
+  }
+
+  @include e(mini) {
+    margin-top: #{math.div(-16px, 2)};
+    .circular {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  &.sp-loading-spinner__sp-loading-dot-circle {
+    top: inherit;
+    margin-top: inherit;
+    transform: inherit;
+    width: 100%;
+    height: 100%;
+    
+    .circular {
+      height: 100%;
+    }
+    
+    .sp-loading-text {
+      position: relative;
+      // top: calc(6em + 24px);
+    }
+
+    // &.sp-loading-spinner {
+    //   font-size: 6.857px;
+    // }
+    @include e(large) {
+      &.sp-loading-spinner {
+        font-size: 10px;
+      }
+      .sp-loading-text {
+        top: calc(50% + 34px);
+      }
+    }
+    @include e(medium) {
+      &.sp-loading-spinner {
+        font-size: 6.857px;
+      }
+      .sp-loading-text {
+        top: calc(50% + 24px);
+      }
+    }
+    @include e(small) {
+      &.sp-loading-spinner {
+        font-size: 4.57px;
+      }
+      .sp-loading-text {
+        top: calc(50% + 16px);
+      }
+    }
+    @include e(mini) {
+      &.sp-loading-spinner {
+        font-size: 2.28px;
+      }
+      .sp-loading-text {
+        top: calc(50% + 8px);
+      }
+    }
+  }
+}
+
+.sp-loading-fade-enter,
+.sp-loading-fade-leave-active {
+  opacity: 0;
+}
+
+@keyframes loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
+  }
+}
+.sp-loading-dot-circle {
+  color: transparentize($--loading-spinner-color, 1);
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  animation: loadingDotCircle 1.3s infinite linear;
+  transform: translateZ(0);
+  vertical-align: middle;
+  // box-shadow: 0 -3em 0 -0.4em transparentize($--loading-spinner-color, 1), 2em -2em 0 -0.2em transparentize($--loading-spinner-color, 0.8), 3em 0 0 0em transparentize($--loading-spinner-color, 0.6), 2em 2em 0 0.1em  transparentize($--loading-spinner-color, 0.4), 0 3em 0 0.2em  transparentize($--loading-spinner-color, 0.2), -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+}
+@keyframes loadingDotCircle {
+  0%,
+  100% {
+    box-shadow: 0 -3em 0 -0.4em transparentize($--loading-spinner-color, 1), 2em -2em 0 -0.2em transparentize($--loading-spinner-color, 0.8), 3em 0 0 0em transparentize($--loading-spinner-color, 0.6), 2em 2em 0 0.1em  transparentize($--loading-spinner-color, 0.4), 0 3em 0 0.2em  transparentize($--loading-spinner-color, 0.2), -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+  }
+  12.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -0.4em transparentize($--loading-spinner-color, 1), 3em 0 0 -0.2em transparentize($--loading-spinner-color, 0.8), 2em 2em 0 0em  transparentize($--loading-spinner-color, 0.6), 0 3em 0 0.1em  transparentize($--loading-spinner-color, 0.4), -2em 2em 0 0.2em  transparentize($--loading-spinner-color, 0.2), -3em 0 0 -1em, -2em -2em 0 -1em;
+  }
+  25% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -0.4em  transparentize($--loading-spinner-color, 1), 2em 2em 0 -0.2em  transparentize($--loading-spinner-color, 0.8), 0 3em 0 0em transparentize($--loading-spinner-color, 0.6), -2em 2em 0 0.1em transparentize($--loading-spinner-color, 0.4), -3em 0 0 0.2em transparentize($--loading-spinner-color, 0.2), -2em -2em 0 -1em;
+  }
+  37.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -0.4em transparentize($--loading-spinner-color, 1), 0 3em 0 -0.2em transparentize($--loading-spinner-color, 0.8), -2em 2em 0 0em transparentize($--loading-spinner-color, 0.6), -3em 0 0 0.1em transparentize($--loading-spinner-color, 0.4), -2em -2em 0 0.2em transparentize($--loading-spinner-color, 0.2);
+  }
+  50% {
+    box-shadow: 0 -3em 0 0.2em transparentize($--loading-spinner-color, 0.2), 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -0.4em transparentize($--loading-spinner-color, 1), -2em 2em 0 -0.2em transparentize($--loading-spinner-color, 0.8), -3em 0 0 0em transparentize($--loading-spinner-color, 0.6), -2em -2em 0 0.1em transparentize($--loading-spinner-color, 0.4);
+  }
+  62.5% {
+    box-shadow: 0 -3em 0 0.1em transparentize($--loading-spinner-color, 0.4), 2em -2em 0 0.2em transparentize($--loading-spinner-color, 0.2), 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -0.4em transparentize($--loading-spinner-color, 1), -3em 0 0 -0.2em transparentize($--loading-spinner-color, 0.8), -2em -2em 0 0em transparentize($--loading-spinner-color, 0.6);
+  }
+  75% {
+    box-shadow: 0 -3em 0 0em transparentize($--loading-spinner-color, 0.6), 2em -2em 0 0.1em transparentize($--loading-spinner-color, 0.4), 3em 0 0 0.2em transparentize($--loading-spinner-color, 0.2), 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -0.4em transparentize($--loading-spinner-color, 1), -2em -2em 0 -0.2em transparentize($--loading-spinner-color, 0.8);
+  }
+  87.5% {
+    box-shadow: 0 -3em 0 -0.2em transparentize($--loading-spinner-color, 0.8), 2em -2em 0 0em transparentize($--loading-spinner-color, 0.6), 3em 0 0 0.1em transparentize($--loading-spinner-color, 0.4), 2em 2em 0 0.2em transparentize($--loading-spinner-color, 0.2), 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -0.4em transparentize($--loading-spinner-color, 1);
+  }
+}

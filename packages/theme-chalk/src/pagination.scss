@@ -1,0 +1,312 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+@import "select";
+
+@include b(pagination) {
+  white-space: nowrap;
+  padding: 2px 5px;
+  color: $--pagination-font-color;
+  font-size: 12px;
+  @include utils-clearfix;
+
+  span:not([class*=suffix]),
+  button {
+    display: inline-block;
+    font-size: $--pagination-font-size;
+    min-width: $--pagination-button-width;
+    height: $--pagination-button-height;
+    line-height: $--pagination-button-height;
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+
+  .sp-input__inner {
+    display: block;
+    text-align: center;
+    -moz-appearance: textfield;
+    line-height: normal;
+  }
+
+  // pagesize 的下拉 icon
+  .sp-input__suffix {
+    right: 0;
+    transform: scale(.8);
+  }
+
+  .sp-select .sp-input {
+    width: 100px;
+    // margin: 0 5px;
+
+    .sp-input__inner {
+      padding-right: 25px;
+      border-radius: $--pagination-border-radius;
+    }
+  }
+
+  button {
+    border: none;
+    padding: 0 6px;
+    background: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      border-color: $--border-color-hover;
+      color: $--pagination-hover-color;
+    }
+
+    &:disabled {
+      border-color: $--border-color-base;
+      color: $--pagination-button-disabled-color;
+      background-color: $--pagination-button-disabled-background-color;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-prev,
+  .btn-next {
+    background: center center no-repeat;
+    background-size: 16px;
+    background-color: $--pagination-background-color;
+    cursor: pointer;
+    margin: 0 8px 0 0;
+    color: $--pagination-button-color;
+    border: $--border-base;
+    border-radius: $--border-radius-base;
+
+    .sp-icon {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+
+  .btn-prev {
+    // padding-right: 12px;
+  }
+
+  .btn-next {
+    // padding-left: 12px;    
+  }
+
+  .sp-pager li.disabled {
+    color: $--color-text-placeholder;
+    cursor: not-allowed;
+  }
+
+  @include m(small) {
+    button.btn-prev,
+    button.btn-next,
+    .sp-pager li,
+    .sp-pager li.btn-quicknext,
+    .sp-pager li.btn-quickprev,
+    .sp-pager li:last-child {
+      border-color: transparent;
+      font-size: 12px;
+      line-height: 22px;
+      height: 24px;
+      min-width: 24px;
+      margin-right: 0;
+
+      &:not(.active):hover {
+        border: 1px solid transparent;
+      }
+      &.active {
+        border-color: $--border-color-hover;
+      }
+    }
+
+    .arrow.disabled {
+      visibility: hidden;
+    }
+
+    .more::before,
+    li.more::before {
+      line-height: 24px;
+    }
+
+    span:not([class*=suffix]),
+    button {
+      height: 24px;
+      line-height: 24px;
+    }
+
+    @include e(editor) {
+      height: 24px;
+      &.sp-input .sp-input__inner {
+        height: 24px;
+      }
+    }
+  }
+
+  @include e(sizes) {
+    margin: 0 10px 0 0;
+    font-weight: normal;
+    color: $--color-text-regular;
+
+    .sp-input .sp-input__inner {
+      font-size: $--pagination-font-size;
+      padding-left: 12px;
+      text-align: left;
+
+      &:hover {
+        border-color: $--pagination-hover-color;
+      }
+    }
+  }
+
+  @include e(total) {
+    margin-right: 8px;
+    font-weight: normal;
+    color: $--color-text-regular;
+  }
+
+  @include e(jump) {
+    margin-right: 8px;
+    font-weight: normal;
+    color: $--color-text-regular;
+
+    .sp-input__inner {
+      padding: 0 3px;
+    }
+  }
+
+  @include e(rightwrapper) {
+    float: right;
+  }
+
+  @include e(editor) {
+    line-height: 18px;
+    height: $--pagination-button-height;
+      
+    text-align: center;
+    margin: 0 8px;
+    box-sizing: border-box;
+    border-radius: $--pagination-border-radius;
+
+    &.sp-input {
+      width: 40px;
+    }
+
+    &.sp-input .sp-input__inner {
+      height: $--pagination-button-height;
+    }
+
+    .sp-input__inner::-webkit-inner-spin-button,
+    .sp-input__inner::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  @include when(background) {
+    .btn-prev,
+    .btn-next,
+    .sp-pager li {
+      margin: 0 5px;
+      background-color: $--color-info-lighter;
+      color: $--color-text-regular;
+      min-width: 30px;
+      border-radius: 2px;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .btn-prev, .btn-next {
+      padding: 0;
+
+      &:disabled {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .sp-pager li:not(.disabled) {
+      &:hover {
+        color: $--pagination-hover-color;
+      }
+
+      &.active {
+        background-color: $--color-primary;
+        color: $--color-white;
+      }
+    }
+
+    &.sp-pagination--small {
+      .btn-prev,
+      .btn-next,
+      .sp-pager li {
+        margin: 0 3px;
+        min-width: 24px;
+      }
+    }
+  }
+}
+
+@include b(pager) {
+  user-select: none;
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+
+  .more::before {
+    line-height: 30px;
+  }
+
+  li {
+    padding: 0 4px;
+    background: $--pagination-background-color;
+    vertical-align: top;
+    display: inline-block;
+    font-size: $--pagination-font-size;
+    min-width: $--pagination-button-width;
+    height: $--pagination-button-height;
+    line-height: $--pagination-button-height;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid $--border-color-base;
+    border-radius: $--border-radius-base;
+    text-align: center;
+    margin: 0 8px 0 0;
+
+    &.btn-quicknext,
+    &.btn-quickprev {
+      line-height: 28px;
+      color: $--pagination-button-color;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    &.btn-quickprev:hover {
+      cursor: pointer;
+    }
+
+    &.btn-quicknext:hover {
+      cursor: pointer;
+    }
+
+    &.active + li {
+      // border-left: 0;
+    }
+
+    &:hover {
+      border: 1px solid $--border-color-hover;
+      color: $--pagination-hover-color;
+    }
+
+    &.active {
+      border: 1px solid $--border-color-hover;
+      color: $--pagination-hover-color;
+      cursor: default;
+    }
+  }
+}

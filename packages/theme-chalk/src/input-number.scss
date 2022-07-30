@@ -1,0 +1,317 @@
+@use "sass:math";
+@import "mixins/mixins";
+@import "common/var";
+@import "input";
+
+@include b(input-number) {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  line-height: #{$--input-height - 2};
+  font-size: $--font-size-base;
+
+  input {
+    @include placeholder {
+      color: $--color-text-secondary;
+    }
+  }
+
+  .sp-input {
+    display: block;
+    width: 100%;
+    &__inner {
+      -webkit-appearance: none;
+      padding-left: #{$--input-height + 10};
+      padding-right: #{$--input-height + 10};
+    }
+  }
+
+  @include e(local) {
+    position: relative;
+    display: block;
+  }
+
+  @include e((increase, decrease)) {
+    position: absolute;
+    z-index: 1;
+    top: 1px;
+    width: 29px;
+    height: auto;
+    text-align: center;
+    background: $--color-white;
+    color: $--color-text-regular;
+    cursor: pointer;
+    font-size: 12px;
+
+    &:hover {
+      color: $--color-primary;
+
+      &:not(.is-disabled) ~ .sp-input .sp-input__inner:not(.is-disabled) {
+        border-color: $--input-focus-border;
+      }
+    }
+
+    &.is-disabled {
+      color: $--disabled-color-base;
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(increase) {
+    right: 1px;
+    border-radius: 0 $--border-radius-base $--border-radius-base 0;
+    border-left: $--border-base;
+  }
+
+  @include e(decrease) {
+    left: 1px;
+    border-radius: $--border-radius-base 0 0 $--border-radius-base;
+    border-right: $--border-base;
+  }
+
+  @include when(controls-hover-show) {
+    .sp-input-number__decrease,
+    .sp-input-number__increase {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    &:hover {
+      .sp-input-number__decrease,
+      .sp-input-number__increase {
+        opacity: 1;
+      }
+    }
+  }
+
+  @include when(disabled) {
+    @include e((increase, decrease)) {
+      border-color: $--disabled-border-base;
+      color: $--disabled-border-base;
+
+      &:hover {
+        color: $--disabled-border-base;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  @include m(large) {
+    width: 200px;
+    line-height: #{$--input-large-height - 2};
+
+    @include e((increase, decrease)) {
+      width: $--input-large-height;
+      font-size: $--input-large-font-size;
+    }
+
+    .sp-input__inner {
+      padding-left: #{$--input-large-height + 7};
+      padding-right: #{$--input-large-height + 7};
+    }
+  }
+
+  @include m(small) {
+    width: 100px;
+    line-height: #{$--input-small-height - 2};
+
+    @include e((increase, decrease)) {
+      width: $--input-small-height;
+      font-size: $--input-small-font-size;
+
+      [class*=sp-icon] {
+        transform: scale(.9);
+      }
+    }
+
+    .sp-input__inner {
+      padding-left: #{$--input-small-height + 7};
+      padding-right: #{$--input-small-height + 7};
+    }
+  }
+
+  @include m(mini) {
+    width: 100px;
+    line-height: #{$--input-mini-height - 2};
+
+    @include e((increase, decrease)) {
+      width: $--input-mini-height;
+      font-size: $--input-mini-font-size;
+
+      [class*=sp-icon] {
+        transform: scale(.8);
+        line-height: 0.5;
+      }
+    }
+
+    .sp-input__inner {
+      padding-left: #{$--input-mini-height + 7};
+      padding-right: #{$--input-mini-height + 7};
+    }
+  }
+
+  @include when(without-controls) {
+    .sp-input__inner {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  @include when(controls-right) {
+    .sp-input__inner {
+      padding-left: 15px;
+      padding-right: #{$--input-height + 10};
+    }
+
+    @include e((increase, decrease)) {
+      height: auto;
+      width: 24px;
+      line-height: #{math.div($--input-height - 2, 2)};
+
+      // [class*=sp-icon] {
+      //   transform: scale(.8);
+      // }
+    }
+
+    @include e(increase) {
+      border-radius: 0 $--border-radius-base 0 0;
+      border-bottom: $--border-base;
+    }
+
+    @include e(decrease) {
+      right: 1px;
+      bottom: 1px;
+      top: auto;
+      left: auto;
+      border-right: none;
+      border-left: $--border-base;
+      border-radius: 0 0 $--border-radius-base 0;
+    }
+
+    &[class*=large] {
+      [class*=increase], [class*=decrease] {
+        line-height: #{math.div($--input-large-height - 2, 2)};
+      }
+    }
+
+    &[class*=small] {
+      [class*=increase], [class*=decrease] {
+        line-height: #{math.div($--input-small-height - 2, 2)};
+      }
+    }
+
+    &[class*=mini] {
+      [class*=increase], [class*=decrease] {
+        line-height: #{math.div($--input-mini-height - 2, 2)};
+      }
+    }
+  }
+}
+
+@include b(input-number-group) {
+  line-height: normal;
+  display: inline-table;
+  border-collapse: separate;
+  border-spacing:0;
+
+  > .sp-input__inner {
+    vertical-align: middle;
+    display: table-cell;
+  }
+
+
+  @include e((append, prepend)) {
+    background-color: $--background-color-light1;
+    color: $--color-text-primary;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    border: $--border-base;
+    border-radius: $--input-border-radius;
+    padding: 0 12px;
+    width: 1px;
+    white-space: nowrap;
+
+    > .sp-input {
+      width: auto;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    > .sp-select,
+    > .sp-button,
+    > .sp-input {
+      display: inline-block;
+      margin: -10px -12px;
+      .sp-input .sp-input__inner {
+        padding: 0 10px 0 0;
+      }
+    }
+
+    > button.sp-button,
+    > div.sp-select .sp-input__inner,
+    > div.sp-select:hover .sp-input__inner,
+    .sp-input__inner {
+      border-color: transparent;
+      background-color: transparent;
+      border-top: 0;
+      border-bottom: 0;
+    }
+
+    .sp-select {
+      .sp-input__inner {
+        text-align: center;
+      }
+    }
+
+    .sp-button,
+    .sp-input {
+      font-size: inherit;
+    }
+  }
+
+  &.is-disabled {
+    @include e((append, prepend)) {
+      color: $--font-color-disabled-base;
+      background-color: $--background-color-disabled;
+    }
+  }
+
+  @include e(prepend) {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    .sp-input__inner:hover,
+    .sp-input__inner:focus {
+      border-color: transparent;
+    }
+  }
+
+  @include e(append) {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  @include m(prepend) {
+    .sp-input__inner {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .sp-select .sp-input.is-focus .sp-input__inner {
+      border-color: transparent;
+    }
+  }
+
+  @include m(append) {
+    .sp-input__inner {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .sp-select .sp-input.is-focus .sp-input__inner {
+      border-color: transparent;
+    }
+  }
+}

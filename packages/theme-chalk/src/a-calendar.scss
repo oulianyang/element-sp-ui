@@ -1,0 +1,337 @@
+@import "mixins/mixins";
+@import "common/var";
+// $full-calendar-prefix-cls: 'sp-a-fullcalendar';
+
+@import 'a-v-calendar';
+
+.sp-a-fullcalendar {
+  $border-width-base: 1px;
+  $border-color-base: $--color-info-light-5;
+  $border-radius-base: 4px;
+  $border-radius-sm: 2px;
+  $border-style-base: solid;
+  $text-color: $--color-text-secondary;
+  $item-hover-bg: $--color-info-light-2;
+  $text-color-inverse: #fff;
+  $disabled-color: $--color-info-light-6;
+  $input-height-base: 28px;
+  $border-color-split: $--color-info-light-2;
+
+
+  $primary-color: $--color-primary;
+  $primary-1: $--color-primary-light-1;
+  $primary-2: $--color-primary-light-1;
+
+
+
+  border-top: $border-width-base $border-style-base $border-color-base;
+  outline: none;
+
+  .sp-a-select-year-select {
+    min-width: 90px;
+
+    &.sp-a-select-sm {
+      min-width: 70px;
+    }
+  }
+
+  .sp-a-select-month-select {
+    min-width: 80px;
+    margin-left: 8px;
+
+    &.sp-a-select-sm {
+      min-width: 70px;
+    }
+  }
+
+  &--header {
+    display: flex;
+    padding: 10px 6px;
+    text-align: center;
+    align-items: center;
+    border-bottom: 1px solid $--border-color-light;
+
+    .sp-date-picker__header-center {
+      flex: 1;
+      line-height: 18px;
+      text-align: center;
+    }
+  }
+
+  &--popperpanel {
+    width: $--a-calendar-popper-width;
+    color: $--color-text-regular;
+    border: 1px solid $--a-calendar-border-color;
+    box-shadow: $--box-shadow-light;
+    background: $--color-white;
+    border-radius: $--border-radius-base;
+    line-height: 30px;
+    padding: 5px;
+
+    @include when(hide) {
+      display: none;
+    }
+    .sp-month-table, .sp-year-table {
+      width: 100%;
+    }
+  }
+
+  &-header {
+    padding: 11px 16px 11px 0;
+    text-align: right;
+
+    .sp-a-select-dropdown {
+      text-align: left;
+    }
+
+    .sp-a-radio-group {
+      margin-left: 8px;
+      text-align: left;
+    }
+
+    label.sp-a-radio-button {
+      height: 22px;
+      padding: 0 10px;
+      line-height: 20px;
+    }
+  }
+
+  &-date-panel {
+    position: relative;
+    outline: none;
+  }
+
+  &-calendar-body {
+    padding: 8px 12px;
+  }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    height: 256px;
+    background-color: transparent;
+    border-collapse: collapse;
+  }
+
+  table,
+  th,
+  td {
+    border: 0;
+  }
+
+  td {
+    position: relative;
+  }
+
+  &-calendar-table {
+    margin-bottom: 0;
+    border-spacing: 0;
+  }
+
+  &-column-header {
+    width: 33px;
+    padding: 0;
+    font-size: $--font-size-base;
+    color: $--color-text-secondary;
+    line-height: 18px;
+    text-align: center;
+    .sp-a-fullcalendar-column-header-inner {
+      display: block;
+      font-weight: normal;
+    }
+  }
+
+  &-week-number-header {
+    .sp-a-fullcalendar-column-header-inner {
+      display: none;
+    }
+  }
+
+  &-month,
+  &-date {
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  &-value {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+    padding: 0;
+    font-size: $--font-size-base;
+    color: $text-color;
+    line-height: 24px;
+    background: transparent;
+    border-radius: $border-radius-sm;
+    transition: all 0.3s;
+
+    &:hover {
+      background: $item-hover-bg;
+      border-top-color: $--border-color-base;
+      cursor: pointer;
+    }
+
+    &:active {
+      color: $text-color-inverse;
+      background: $primary-color;
+    }
+  }
+
+  &-month-panel-cell &-value {
+    width: 48px;
+  }
+
+  &-today &-value,
+  &-month-panel-current-cell &-value {
+    box-shadow: 0 0 0 1px $primary-color inset;
+  }
+
+  &-selected-day &-value,
+  &-month-panel-selected-cell &-value {
+    color: $text-color-inverse;
+    background: $primary-color;
+  }
+
+  &-disabled-cell-first-of-row &-value {
+    border-top-left-radius: $border-radius-base;
+    border-bottom-left-radius: $border-radius-base;
+  }
+
+  &-disabled-cell-last-of-row &-value {
+    border-top-right-radius: $border-radius-base;
+    border-bottom-right-radius: $border-radius-base;
+  }
+
+  &-last-month-cell &-value,
+  &-next-month-btn-day &-value {
+    color: $disabled-color;
+  }
+
+  &-month-panel-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+  }
+
+  &-content {
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    width: 100%;
+  }
+
+  &-fullscreen {
+    border-top: 0;
+  }
+
+  &-fullscreen &-table {
+    table-layout: fixed;
+  }
+
+  &-fullscreen &-header {
+    .sp-a-radio-group {
+      margin-left: 16px;
+    }
+    label.sp-a-radio-button {
+      height: $input-height-base;
+      line-height: $input-height-base - 2px;
+    }
+  }
+
+  &-fullscreen &-month,
+  &-fullscreen &-date {
+    display: block;
+    height: 116px;
+    margin: 0 4px;
+    padding: 4px 8px;
+    font-size: $--font-size-base;
+    line-height: 1.5;
+    color: $--color-text-primary;
+    text-align: left;
+    border-top: 2px solid $border-color-split;
+    transition: background 0.3s;
+
+    &:hover {
+      background: $item-hover-bg;
+      cursor: pointer;
+    }
+
+    &:active {
+      background: $primary-2;
+    }
+  }
+
+  &-fullscreen &-column-header {
+    padding-right: 12px;
+    padding-bottom: 5px;
+    text-align: right;
+  }
+
+  &-fullscreen &-value {
+    width: auto;
+    text-align: right;
+    background: transparent;
+  }
+
+  &-fullscreen &-today &-value {
+    color: $text-color;
+  }
+
+  &-fullscreen &-month-panel-current-cell &-month,
+  &-fullscreen &-today &-date {
+    background: transparent;
+    border-top-color: $item-hover-bg;
+  }
+
+  &-fullscreen &-month-panel-current-cell &-value,
+  &-fullscreen &-today &-value {
+    box-shadow: none;
+  }
+
+  &-fullscreen &-month-panel-selected-cell &-month,
+  &-fullscreen &-selected-day &-date {
+    background: $primary-1;
+  }
+
+  &-fullscreen &-month-panel-selected-cell &-value,
+  &-fullscreen &-selected-day &-value {
+    color: $primary-color;
+  }
+
+  &-fullscreen &-last-month-cell &-date,
+  &-fullscreen &-next-month-btn-day &-date {
+    color: $disabled-color;
+  }
+
+  &-fullscreen &-content {
+    position: static;
+    width: auto;
+    height: 88px;
+    overflow-y: auto;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: left;
+  }
+
+  &-disabled-cell &-date {
+    &,
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  &-disabled-cell:not(&-today) &-date {
+    &,
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  &-disabled-cell &-value {
+    width: auto;
+    color: $disabled-color;
+    border-radius: 0;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,32 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@import "./popover.scss";
+
+@include b(popconfirm) {
+  @include e(main) {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  @include e(title) {
+    display: flex;
+    margin: 12px 12px 4px 12px;
+    align-items: center;
+    font-size: $--size-title;
+    font-weight: $--font-weight-bold;
+  }
+  @include e(icon) {
+    margin-right: 4px;
+    font-size: $--size-title;
+  }
+  @include e(content) {
+    margin: 0 12px 4px 30px;
+  }
+  @include e(action) {
+    padding: 8px 12px;
+    text-align: right; 
+    margin: 8px 0 0 0;
+    border-top: 1px solid $--border-color-light;
+  }
+}

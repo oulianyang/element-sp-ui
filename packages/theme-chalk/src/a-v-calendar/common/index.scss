@@ -1,0 +1,16 @@
+// @prefixClass: rc-calendar;
+// @timePickerClass: rc-time-picker;
+
+.sp-a-calendar {
+  box-sizing: border-box;
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.sp-a-calendar-hidden {
+  display: none;
+}
+
+@import 'Calendar.scss';
+@import 'Picker.scss';

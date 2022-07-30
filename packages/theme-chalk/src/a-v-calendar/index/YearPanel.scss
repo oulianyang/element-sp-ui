@@ -1,0 +1,136 @@
+.sp-a-calendar-year-panel {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #ffffff;
+  z-index: 10;
+  position: absolute;
+  outline: none;
+
+  > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sp-a-calendar-year-panel-hidden {
+  display: none;
+}
+
+.sp-a-calendar-year-panel-header {
+  padding: 0 10px;
+  height: 34px;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  border-bottom: 1px solid #ccc;
+
+  > a {
+    font-weight: bold;
+    display: inline-block;
+    padding: 4px 5px;
+    text-align: center;
+    width: 30px;
+
+    &:hover {
+      cursor: pointer;
+      color: #23c0fa;
+    }
+  }
+}
+
+.sp-a-calendar-year-panel-prev-decade-btn,
+.sp-a-calendar-year-panel-next-decade-btn {
+  position: absolute;
+  top: 0;
+}
+
+.sp-a-calendar-year-panel-next-decade-btn {
+  &:after {
+    content: '»';
+  }
+}
+
+.sp-a-calendar-year-panel-prev-decade-btn {
+  user-select: none;
+  left: 0;
+
+  &:after {
+    content: '«';
+  }
+}
+
+.sp-a-calendar-year-panel .sp-a-calendar-year-panel-decade-select {
+  width: 180px;
+}
+
+.sp-a-calendar-year-panel-decade-select-arrow {
+  display: none;
+}
+
+.sp-a-calendar-year-panel-next-decade-btn {
+  user-select: none;
+  right: 0;
+}
+
+.sp-a-calendar-year-panel-body {
+  flex: 1;
+  padding: 9px 10px 10px;
+}
+
+.sp-a-calendar-year-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
+}
+
+.sp-a-calendar-year-panel-table {
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+  border-collapse: separate;
+}
+
+.sp-a-calendar-year-panel-cell {
+  text-align: center;
+}
+
+.sp-a-calendar-year-panel-year {
+  display: block;
+  width: 46px;
+  margin: 0 auto;
+  color: #666;
+  border-radius: 4px 4px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  line-height: 36px;
+  text-align: center;
+
+  &:hover {
+    background: #ebfaff;
+    cursor: pointer;
+  }
+}
+
+.sp-a-calendar-year-panel-selected-cell .sp-a-calendar-year-panel-year {
+  background: #3fc7fa;
+  color: #fff;
+
+  &:hover {
+    background: #3fc7fa;
+    color: #fff;
+  }
+}
+
+.sp-a-calendar-year-panel-last-decade-cell,
+.sp-a-calendar-year-panel-next-decade-cell {
+  .sp-a-calendar-year-panel-year {
+    user-select: none;
+    -webkit-user-select: none;
+    color: rgba(0, 0, 0, 0.25);
+  }
+}

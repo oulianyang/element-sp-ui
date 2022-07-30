@@ -1,0 +1,69 @@
+@import 'mixins/mixins';
+@import 'common/var';
+
+@include b(descriptions-item) {
+  vertical-align: top;
+  
+  @include e(container) {
+    display: flex;
+
+    .sp-descriptions-item__label,
+    .sp-descriptions-item__content {
+      position: relative;
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .sp-descriptions-item__content {
+      flex: 1;
+
+      display: block;
+      word-break: break-all;
+      overflow: hidden;
+      white-space: normal;
+    }
+    .sp-descriptions-item__unfold {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding-left: 16px;
+      background-color: $--color-white;
+      background: linear-gradient(91deg, transparent 0, #fff 70%);
+    }
+    .sp-descriptions-item__unfold-btn {
+      cursor: pointer;
+      color: $--color-primary;
+    }
+  }
+
+  &.sp-descriptions-item__show-fold {
+    .sp-descriptions-item__container {
+      .sp-descriptions-item__unfold {
+        background: linear-gradient(91deg, transparent 0, #fff 20%);
+      }
+    }
+  }
+
+  @include e(label) {
+    color: $--color-text-secondary-hover;
+    &.has-colon {
+      &::after {
+        content: ':';
+        position: relative;
+        top: -0.5px;
+      }
+    }
+    &.is-bordered-label {
+      font-weight: bold;
+      color: $--color-text-secondary;
+      background: $--descriptions-item-bordered-label-background;
+    }
+    &:not(.is-bordered-label) {
+      margin-right: 10px;
+    }
+  }
+
+  @include e(content) {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}

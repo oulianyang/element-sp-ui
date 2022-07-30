@@ -1,0 +1,230 @@
+@import "mixins/mixins";
+@import "common/var";
+
+$typeMap: (
+  primary: $--link-primary-font-color, 
+  danger: $--link-danger-font-color, 
+  success: $--link-success-font-color, 
+  warning: $--link-warning-font-color, 
+  info: $--link-info-font-color);
+
+@include b(link) {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  position: relative;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: $--link-font-size;
+  font-weight: $--link-font-weight;
+  
+  @include when(underline) {
+    &:hover:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 0;
+      bottom: 0;
+      border-bottom: 1px solid$--color-primary-light-5;
+    }
+  }
+
+  @include when(always-underline) {
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 0;
+      bottom: 0;
+      border-bottom: 1px solid  $--link-default-font-color;
+    }
+    &:hover:after:not(.is-disabled) {
+      border-bottom: 1px solid $--color-primary-light-5;
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+  } 
+
+  & [class*="sp-icon-"] {
+    & + span {
+      margin-left: 5px;
+    }
+  }
+    
+    
+  &.sp-link--default  {
+    color: $--link-default-font-color;
+    &:hover {
+      color: $--color-primary-light-5;
+    }
+    &:active {
+      color: $--color-primary-light-7;
+    }
+    &:after {
+      border-color: $--color-primary-light-5;
+    }
+    @include when(disabled) {
+      color: $--link-disabled-font-color;
+
+      &.is-always-underline {
+        &:after {
+          border-color: $--link-disabled-font-color;
+        }
+      }
+      @include when(always-underline) {
+        &:after {
+          border-color: $--link-disabled-font-color;
+        }
+      }
+    }
+  }
+
+  &.sp-link--primary {
+    color: $--link-primary-font-color;
+    &:hover {
+      color: $--color-primary-light-5;
+    }
+    &:active {
+      color: $--color-primary-light-7;
+    }
+    &:after {
+      border-color: $--link-primary-font-color
+    }
+    @include when(disabled) {
+      // color: mix($--link-primary-font-color, $--color-white, 50%)
+      color: $--color-primary-light-3;
+      
+      @include when(always-underline) {
+        &:after {
+          border-color: $--color-primary-light-3;
+        }
+      }
+    }
+    @include when(underline) {
+      &:hover:after {
+        border-color: $--link-primary-font-color
+      }
+    }
+  }
+
+  &.sp-link--danger {
+    color: $--link-danger-font-color;
+    &:hover {
+      color: $--color-danger-light-5;
+    }
+    &:active {
+      color: $--color-danger-light-7;
+    }
+    &:after {
+      border-color: $--link-danger-font-color
+    }
+    @include when(disabled) {
+      // color: mix($--link-danger-font-color, $--color-white, 50%)
+      color: $--color-primary-light-3;
+
+      @include when(always-underline) {
+        &:after {
+          border-color: $--color-primary-light-3;
+        }
+      }
+    }
+    @include when(underline) {
+      &:hover:after {
+        border-color: $--link-danger-font-color
+      }
+    }
+  }
+
+  &.sp-link--success {
+    color: $--link-success-font-color;
+    &:hover {
+      color: $--color-success-light-5;
+    }
+    &:active {
+      color: $--color-success-light-7;
+    }
+    &:after {
+      border-color: $--link-success-font-color
+    }
+    @include when(disabled) {
+      // color: mix($--link-success-font-color, $--color-white, 50%)
+      color: $--color-primary-light-3;
+
+      @include when(always-underline) {
+        &:after {
+          border-color: $--color-primary-light-3;
+        }
+      }
+    }
+    @include when(underline) {
+      &:hover:after {
+        border-color: $--link-success-font-color
+      }
+    }
+  }
+
+  &.sp-link--warning {
+    color: $--link-warning-font-color;
+    &:hover {
+      color: $--color-warning-light-5;
+    }
+    &:active {
+      color: $--color-warning-light-7;
+    }
+    &:after {
+      border-color: $--link-warning-font-color
+    }
+    @include when(disabled) {
+      // color: mix($--link-warning-font-color, $--color-white, 50%)
+      color: $--color-primary-light-3;
+
+      @include when(always-underline) {
+        &:after {
+          border-color: $--color-primary-light-3;
+        }
+      }
+    }
+    @include when(underline) {
+      &:hover:after {
+        border-color: $--link-warning-font-color
+      }
+    }
+  }
+
+  &.sp-link--info {
+    color: $--link-info-font-color;
+    &:hover {
+      color: $--color-info-light-5;
+    }
+    &:active {
+      color: $--color-info-light-7;
+    }
+    &:after {
+      border-color: $--link-info-font-color
+    }
+    @include when(disabled) {
+      // color: mix($--link-info-font-color, $--color-white, 50%)
+      color: $--color-primary-light-3;
+
+      @include when(always-underline) {
+        &:after {
+          border-color: $--color-primary-light-3;
+        }
+      }
+    }
+    @include when(underline) {
+      &:hover:after {
+        border-color: $--link-info-font-color;
+      }
+    }
+  }
+
+}

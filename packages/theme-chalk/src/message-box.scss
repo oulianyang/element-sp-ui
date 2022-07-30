@@ -1,0 +1,230 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "common/popup";
+@import "button";
+@import "input";
+
+@include b(message-box) {
+  display: inline-block;
+  width: $--msgbox-width;
+  padding-bottom: 12px;
+  vertical-align: middle;
+  background-color: $--color-white;
+  border: 1px solid $--border-color-lighter;
+  font-size: $--messagebox-font-size;
+  box-shadow: $--box-shadow-light;
+  text-align: left;
+  overflow: hidden;
+  backface-visibility: hidden;
+
+  @include e(wrapper) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+
+    &::after {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 0;
+      vertical-align: middle;
+    }
+  }
+
+  @include e(header) {
+    position: relative;
+    padding: $--msgbox-padding-vertical-primary $--msgbox-padding-horizontal-primary;
+  }
+
+  @include e(title) {
+    padding-left: 0;
+    margin-bottom: 0;
+    font-size: $--messagebox-font-size;
+    font-weight: $--font-weight-bold;
+    line-height: 1.5;
+    color: $--messagebox-title-color;
+  }
+
+  @include e(headerbtn) {
+    position: absolute;
+    top: 12px;
+    right: $--msgbox-padding-horizontal-primary;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: $--message-close-size;
+    cursor: pointer;
+
+    .sp-message-box__close {
+      color: $--color-text-secondary;
+    }
+
+    &:focus, &:hover {
+      .sp-message-box__close {
+        color: $--color-text-secondary-hover;
+      }
+    }
+
+  }
+
+  @include e(content) {
+    padding: 20px;
+    color: $--messagebox-content-color;
+    font-size: $--messagebox-content-font-size;
+    border-bottom: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    // min-height: 134px;
+  }
+  
+  @include e(container) {
+    position: relative;
+    display: flex;
+  }
+
+  @include e(input) {
+    padding-top: 15px;
+
+    & input.invalid {
+      border-color: $--color-danger;
+      &:focus {
+        border-color: $--color-danger;
+      }
+    }
+  }
+
+  @include e(status) {
+    font-size: 18px !important;
+
+    &::before {
+      // 防止图标切割
+      padding-left: 1px;
+    }
+
+    + .sp-message-box__message {
+      padding-left: 8px;
+      padding-right: 12px;
+    }
+
+    &.sp-icon-check-circle-fill {
+      color: $--messagebox-success-color;
+    }
+
+    &.sp-icon-info-circle-fill {
+      color: $--messagebox-info-color;
+    }
+
+    &.sp-icon-warning-circle-fill {
+      color: $--messagebox-warning-color;
+    }
+
+    &.sp-icon-close-circle-fill {
+      color: $--messagebox-danger-color;
+    }
+  }
+
+  @include e(message) {
+    margin: 0;
+    word-break: break-all;
+
+    @include e(message-title) {
+      margin: 0;
+      line-height: 18px;
+      font-size: $--font-size-medium;
+      font-weight: $--font-weight-bold;
+    }
+    @include e(message-desc) {
+      margin: 8px 0 0;
+      font-size: $--font-size-base;
+      line-height: 1.5;
+      color: $--color-text-secondary;
+    }
+  }
+
+  @include e(errormsg) {
+    color: $--color-danger;
+    font-size: $--messagebox-error-font-size;
+    min-height: 18px;
+    margin-top: 2px;
+  }
+
+  @include e(btns) {
+    padding: 12px 12px 0;
+    text-align: right;
+
+    & button:nth-child(2) {
+      margin-left: 10px;
+    }
+  }
+
+  @include e(btns-reverse) {
+    flex-direction: row-reverse;
+  }
+
+  // centerAlign 布局
+  @include m(center) {
+
+    @include e(title) {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @include e(status) {
+      position: relative;
+      top: auto;
+      padding-right: 5px;
+      text-align: center;
+      transform: translateY(-1px);
+    }
+
+    @include e(message) {
+      margin-left: 0;
+    }
+
+    @include e((btns, content)) {
+      text-align: center;
+    }
+
+    @include e(content) {
+      $padding-horizontal: $--msgbox-padding-horizontal-primary + 12px;
+
+      padding-left: $padding-horizontal;
+      padding-right: $padding-horizontal;
+    }
+  }
+}
+
+.msgbox-fade-enter-active {
+  animation: msgbox-fade-in .3s;
+}
+
+.msgbox-fade-leave-active {
+  animation: msgbox-fade-out .3s;
+}
+
+@keyframes msgbox-fade-in {
+  0% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes msgbox-fade-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+}

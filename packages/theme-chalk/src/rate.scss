@@ -1,0 +1,63 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(rate) {
+  height: $--rate-height;
+  line-height: 1;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+
+  &:focus,
+  &:active {
+    outline-width: 0;
+  }
+
+  @include e(item) {
+    display: inline-block;
+    position: relative;
+    font-size: 0;
+    vertical-align: middle;
+  }
+
+  @include e(icon) {
+    position: relative;
+    display: inline-block;
+    font-size: $--rate-icon-size;
+    color: $--rate-icon-color;
+    transition: 0.3s;
+    &.hover {
+      transform: scale(1.15);
+    }
+
+    .path2 {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  &.sp-rate-big {
+    .sp-rate__icon {
+      font-size: $--rate-big-icon-size;
+    }
+    .sp-rate__text {
+      display: inline-block;
+      margin-top: 2px;
+      font-size: $--rate-big-font-size;
+    }
+  }
+
+  @include e(decimal) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  @include e(text) {
+    font-size: $--rate-font-size;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+}

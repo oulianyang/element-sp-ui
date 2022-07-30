@@ -1,0 +1,124 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(affix-list) {
+  @include m(wrap) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: flex-end;
+    width: 40px;
+  }
+
+  @include m(item) {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-grow: 0;
+    transition: all .3s;
+    background-color: $--affix-list-background;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
+    color: $--affix-list-color;
+    cursor: pointer;
+
+
+    @include e(detail) {
+      width: auto;
+      height: 40px;
+      padding: 0 20px 0 12px;
+      position: absolute;
+      right: 40px;
+      top: 0;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      transition: all .3s;
+      transform-origin: 100% 100%;
+      transform: scaleX(0);
+    }
+
+    &:hover {
+      color: $--affix-list-color-hover;
+      background-color: $--affix-list-background-hover;
+
+      .sp-affix-list__detail {
+        color: $--affix-list-color-hover;
+        background-color: $--affix-list-background-hover;
+        box-shadow: -4px 2px 8px 0 rgba(0, 0, 0, 0.16);
+        transform: scaleY(1);
+      }
+    }
+  }
+
+  @include e(drag-handle) {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-grow: 0;
+    transition: all 0.3s;
+    background-color: #fff;
+    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 16%);
+    color: #4974F5;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+    // transform: scaleY(0.8);
+
+    i {
+      transform: rotate(90deg);
+      transform-origin: center;
+    }
+
+    &.sp-affix-list__drag-disabled {
+      display: none;
+    }
+  }
+
+
+  @include m(icon) {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    right: 0;
+  }
+}
+
+@include b(affix-list--fix) {
+  position: fixed;
+  top: var(--offsetTop);
+  bottom: var(--offsetBottom);
+  left: var(--offsetLeft);
+  right: var(--offsetRight);
+  z-index: 5;
+}
+
+@include b(affix-list--right) {
+  .sp-affix-list__detail {
+    left: 40px;
+    padding: 0 20px 0 12px;
+    right: inherit;
+    transform-origin: 0% 0%;
+    box-shadow: 4px 2px 8px 0 rgba(0, 0, 0, 0.16);
+  }
+}
+
+@include b(affix-list--horizontal-left) {
+  .sp-affix-list--item {
+    .sp-affix-list__detail {
+      transform-origin: 0% 100%;
+      right: inherit;
+      left: 40px;
+      box-shadow: 4px 2px 8px 0 rgb(0 0 0 / 16%);
+    }
+  }
+}

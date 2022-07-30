@@ -1,0 +1,104 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+
+@include b(breadcrumb) {
+  font-size: 14px;
+  line-height: 1;
+  @include utils-clearfix;
+
+  @include e(separator) {
+    margin: 0 4px;
+    color: $--color-text-placeholder;
+
+    &[class*=icon] {
+      margin: 0 6px;
+      font-weight: normal;
+    }
+  }
+
+  @include e(prefix) {
+    color: $--color-text-secondary;
+    font-size: $--font-size-base;
+    line-height: $--font-line-height-primary;
+  }
+
+  @include e(item) {
+    font-size: $--font-size-base;
+    line-height: $--font-line-height-primary;
+
+    @include e(inner) {
+      color: $--color-text-secondary;
+
+      &.is-link,
+      & a {
+        text-decoration: none;
+        transition: $--color-transition-base;
+        color: $--color-text-primary;
+
+        &:hover {
+          color: $--color-primary;
+          cursor: pointer;
+        }
+      }
+    }
+
+    &:last-child {
+
+      .sp-breadcrumb__inner,
+      .sp-breadcrumb__inner a {
+
+        &,
+        &:hover {
+          font-weight: normal;
+          color: $--color-text-primary;
+          cursor: text;
+        }
+      }
+
+      .sp-breadcrumb__separator {
+        display: none;
+      }
+    }
+  }
+}
+
+@include b(tooltip) {
+
+  @include e(popper) {
+
+    @include when(light) {
+      >.sp-breadcrumb__item {
+
+        >.sp-breadcrumb__inner,
+        >.sp-breadcrumb__separator {
+          color: $--color-black;
+        }
+
+        &:not(:nth-last-child(2)) {
+          >.sp-breadcrumb__separator::before {
+            content: '/';
+          }
+        }
+      }
+    }
+
+    @include when(dark) {
+      >.sp-breadcrumb__item {
+
+        >.sp-breadcrumb__inner,
+        >.sp-breadcrumb__separator {
+          color: $--color-white;
+        }
+
+        &:not(:nth-last-child(2)) {
+          >.sp-breadcrumb__separator::before {
+            content: '/';
+          }
+        }
+      }
+    }
+
+  }
+
+}
